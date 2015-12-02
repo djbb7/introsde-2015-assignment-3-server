@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="Person")
@@ -38,7 +39,7 @@ public class Person {
 	@TableGenerator(name="sqlite_person", table="sqlite_sequence",
 	    pkColumnName="name", valueColumnName="seq",
 	    pkColumnValue="Person")
-	@Column(name="id")
+	@Column(name="id", updatable=false)
 	private Long id;
 	
 	@Column(name="firstname")
@@ -51,8 +52,8 @@ public class Person {
 	@Column(name="birthdate")
 	private Date birthdate;
 	
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=CurrentHealth.class)
-	@JoinColumn(name="idPerson", referencedColumnName="id", nullable=false)
+	@OneToMany(cascade=CascadeType.REMOVE, targetEntity=CurrentHealth.class)
+	@JoinColumn(name="idPerson", referencedColumnName="id", nullable=false, updatable=false, insertable=false)
 	private List<Measure> currentHealth; // one for each type of measure
 	
 	
@@ -80,13 +81,13 @@ public class Person {
 		return birthdate;
 	}
 
-	
+	@XmlElementWrapper(name="currentHealth")
+	@XmlElement(name="measure")
 	public List<Measure> getCurrentHealth() {
 		return currentHealth;
 	}
 
-	@XmlElementWrapper(name="currentHealth")
-	@XmlElement(name="measure")
+	@XmlTransient
 	public List<Measure> getHealthHistory() {
 		return healthHistory;
 	}

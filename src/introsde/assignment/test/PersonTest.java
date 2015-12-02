@@ -51,8 +51,8 @@ public class PersonTest {
 		p.setFirstname("Pedro");
 		p.setLastname("Palma");
 		Calendar c = Calendar.getInstance();
-		c.set(1990, 3, 7);
-		p.setBirthdate(new Date(1990, 3, 7));
+		c.set(1990, 3, 7,0,0,0);
+		p.setBirthdate(c.getTime());
 		
 		Person savedP = Person.savePerson(p);
 		
@@ -65,20 +65,20 @@ public class PersonTest {
 		
 		Assert.assertEquals(readP.getFirstname(), p.getFirstname());
 		Assert.assertEquals(readP.getLastname(), p.getLastname());
-		Assert.assertEquals(readP.getBirthdate(), p.getBirthdate());
+		Assert.assertEquals(readP.getBirthdate().getTime()/1000, p.getBirthdate().getTime()/1000);
 		
 		// Update the person's details and check they were persisted
 		System.out.println("----->Update person");
 		readP.setFirstname("Joshua");
 		readP.setLastname("Smith");
-		c.set(1989, 9, 22);
-		readP.setBirthdate(new Date(1989,9,22));
+		c.set(1989, 9, 22,0,0,0);
+		readP.setBirthdate(c.getTime());
 		Person.updatePerson(readP);
 		Person reReadP = Person.getPersonById(savedP.getId());
 		
 		Assert.assertEquals(reReadP.getFirstname(), readP.getFirstname());
 		Assert.assertEquals(reReadP.getLastname(), readP.getLastname());
-		Assert.assertEquals(reReadP.getBirthdate(), readP.getBirthdate());
+		Assert.assertEquals(reReadP.getBirthdate().getTime()/1000, readP.getBirthdate().getTime()/1000);
 		
 		// Delete the person
 		System.out.println("----->Delete person");
@@ -158,4 +158,6 @@ public class PersonTest {
 		
 		Assert.assertEquals("71", p.getHealthHistory().get(0).getMeasureValue());
 	}
+	
+
 }
