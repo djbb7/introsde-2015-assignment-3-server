@@ -3,6 +3,7 @@
 	<persistence-unit name="introsde-2015-assignment-3">
 	    <class>introsde.assignment.model.Person</class>
         <class>introsde.assignment.model.Measure</class>
+        <class>introsde.assignment.model.CurrentHealth</class>               
         <class>introsde.assignment.model.MeasureType</class>
         <properties>
             <!-- the jdbc driver we will use to connect to the database 

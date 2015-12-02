@@ -21,6 +21,9 @@ import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.hamcrest.Factory;
 
 @Entity
 @Table(name="Measure")
@@ -44,7 +47,7 @@ public class Measure {
 	@Column(name="id")
 	private Long mid;
 	 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date")
 	private Date dateRegistered = new Date();
 	
@@ -79,6 +82,7 @@ public class Measure {
 		return measureType;
 	}
 
+	@XmlTransient
 	public Person getPerson() {
 		return person;
 	}

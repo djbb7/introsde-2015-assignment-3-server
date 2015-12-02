@@ -21,12 +21,16 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 @Entity
 @Table(name="Person")
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
 @XmlRootElement
+@XmlSeeAlso(CurrentHealth.class)
 public class Person {
 
 	@Id
@@ -46,12 +50,13 @@ public class Person {
 	@Temporal(TemporalType.DATE)
 	@Column(name="birthdate")
 	private Date birthdate;
-	/*
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinFormula
-	private List<Measure> currentHealth; // one for each type of measure*/
 	
-	@OneToMany(cascade=CascadeType.ALL ,fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=CurrentHealth.class)
+	@JoinColumn(name="idPerson", referencedColumnName="id", nullable=false)
+	private List<Measure> currentHealth; // one for each type of measure
+	
+	
+	@OneToMany(cascade=CascadeType.ALL ,fetch=FetchType.EAGER, targetEntity=Measure.class)
 	@JoinColumn(name="idPerson", referencedColumnName="id", nullable=false)
 	private List<Measure> healthHistory; // all measurements
 
@@ -75,11 +80,13 @@ public class Person {
 		return birthdate;
 	}
 
-	/*
+	
 	public List<Measure> getCurrentHealth() {
 		return currentHealth;
-	}*/
+	}
 
+	@XmlElementWrapper(name="currentHealth")
+	@XmlElement(name="measure")
 	public List<Measure> getHealthHistory() {
 		return healthHistory;
 	}
@@ -100,10 +107,9 @@ public class Person {
 		this.birthdate = birthdate;
 	}
 	
-	/*
 	public void setCurrentHealth(List<Measure> currentHealth) {
 		this.currentHealth = currentHealth;
-	}*/
+	}
 
 	public void setHealthHistory(List<Measure> healthHistory) {
 		this.healthHistory = healthHistory;
