@@ -1,6 +1,7 @@
 package introsde.assignment.soap;
 
 import introsde.assignment.model.Measure;
+import introsde.assignment.model.MeasureType;
 import introsde.assignment.model.Person;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public interface People {
     
     @WebMethod(operationName="deletePerson")
     @WebResult(name="personId") 
-    public void deletePerson(@WebParam(name="personId") Long id);
+    public int deletePerson(@WebParam(name="personId") Long id);
     
     @WebMethod(operationName="readPersonHistory")
     @WebResult(name="measures")
@@ -43,7 +44,7 @@ public interface People {
     
     @WebMethod(operationName="readMeasureTypes")
     @WebResult(name="measureTypes") 
-    public List<String> readMeasureTypes();
+    public List<MeasureType> readMeasureTypes();
     
     @WebMethod(operationName="readPersonMeasure")
     @WebResult(name="measure")

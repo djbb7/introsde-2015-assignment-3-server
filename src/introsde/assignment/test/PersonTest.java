@@ -9,10 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,10 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PersonTest {
-
-    private static EntityManagerFactory emf;
-    private static EntityManager em;
-    private EntityTransaction tx;
         
 	@BeforeClass
     public static void beforeClass() {

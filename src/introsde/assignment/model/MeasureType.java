@@ -55,9 +55,9 @@ public class MeasureType {
 	}
 	
 	//database operations
-	public static List<String> getMeasureTypes(){
+	public static List<MeasureType> getMeasureTypes(){
 		EntityManager em = PersonMeasureDao.instance.createEntityManager();
-	    List<String> list = em.createNamedQuery("MeasureType.findAll", String.class).getResultList();
+	    List<MeasureType> list = em.createNamedQuery("MeasureType.findAll", MeasureType.class).getResultList();
 	    PersonMeasureDao.instance.closeConnections(em);
 	    return list;
 	}

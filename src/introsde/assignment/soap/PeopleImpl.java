@@ -1,6 +1,7 @@
 package introsde.assignment.soap;
 
 import introsde.assignment.model.Measure;
+import introsde.assignment.model.MeasureType;
 import introsde.assignment.model.Person;
 
 import java.util.List;
@@ -31,11 +32,11 @@ public class PeopleImpl implements People {
 	}
 
 	@Override
-	public void deletePerson(Long id) {
+	public int deletePerson(Long id) {
 		Person del = Person.getPersonById(id);
 		if(del != null)
 			Person.removePerson(del);
-		return;
+		return -1;
 	}
 
 	@Override
@@ -58,15 +59,13 @@ public class PeopleImpl implements People {
 	}
 	
 	@Override
-	public List<String> readMeasureTypes() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MeasureType> readMeasureTypes() {
+		return MeasureType.getMeasureTypes();
 	}
 
 	@Override
 	public Measure readPersonMeasure(Long id, String measureType, Long mid) {
-		// TODO Auto-generated method stub
-		return null;
+		return Measure.getMeasureById(id, measureType, mid);
 	}
 
 }

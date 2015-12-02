@@ -55,6 +55,10 @@ public class Person {
 	@JoinColumn(name="idPerson", referencedColumnName="id", nullable=false)
 	private List<Measure> healthHistory; // all measurements
 
+	public Person(){
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}
