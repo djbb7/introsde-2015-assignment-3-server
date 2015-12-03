@@ -1,5 +1,6 @@
 package introsde.assignment.soap;
 
+import introsde.assignment.model.HealthProfileHistory;
 import introsde.assignment.model.Measure;
 import introsde.assignment.model.MeasureType;
 import introsde.assignment.model.Person;
@@ -74,14 +75,19 @@ public class PeopleImpl implements People {
 	}
 
 	@Override
-	public List<Measure> readPersonHistory(Long id, String measureType) {
-		Person p = new Person();
-		p.setHealthHistory(Measure.getMeasureHistory(id, measureType));
-		return p.getHealthHistory();
+	public HealthProfileHistory readPersonHistory(Long id, String measureType) {
+		HealthProfileHistory hist = new HealthProfileHistory();
+		hist.setHealthProfile_history(Measure.getMeasureHistory(id, measureType));
+		return hist;
 	}
 
 	@Override
-	public Measure savePersonMeasure(Long id, Measure m) {
+	public Measure readPersonMeasurement(Long id, String measureType, Long mid) {
+		return Measure.getMeasureById(id, measureType, mid);
+	}
+	
+	@Override
+	public Measure savePersonMeasurement(Long id, Measure m) {
 		Person p = Person.getPersonById(id);
 		Person.addMeasure(p, m);
 		return m;
@@ -99,9 +105,6 @@ public class PeopleImpl implements People {
 		return MeasureType.getMeasureTypes();
 	}
 
-	@Override
-	public Measure readPersonMeasure(Long id, String measureType, Long mid) {
-		return Measure.getMeasureById(id, measureType, mid);
-	}
+
 
 }

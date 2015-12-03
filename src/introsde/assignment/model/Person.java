@@ -82,7 +82,6 @@ public class Person {
 	}
 
 	@XmlElementWrapper(name="currentHealth")
-	@XmlElement(name="measure")
 	public List<Measure> getCurrentHealth() {
 		return currentHealth;
 	}
@@ -184,6 +183,8 @@ public class Person {
 			history = new ArrayList<Measure>();
 		
 		history.add(m);
+		m.setPerson(p);
+		m.setMeasureType(MeasureType.getMeasureTypeByName(m.getMeasureType().getMeasureType()));
 		EntityManager em = PersonMeasureDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();

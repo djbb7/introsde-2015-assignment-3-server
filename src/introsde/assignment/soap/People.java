@@ -1,5 +1,6 @@
 package introsde.assignment.soap;
 
+import introsde.assignment.model.HealthProfileHistory;
 import introsde.assignment.model.Measure;
 import introsde.assignment.model.MeasureType;
 import introsde.assignment.model.Person;
@@ -13,7 +14,6 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.jws.soap.SOAPBinding.Use;
-import javax.xml.bind.annotation.XmlElementWrapper;
 
 @WebService
 @SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
@@ -40,20 +40,20 @@ public interface People {
     public boolean deletePerson(@WebParam(name="personId") Long id);
     
     @WebMethod(operationName="readPersonHistory")
-    @WebResult(name="measure")
-    public List<Measure> readPersonHistory(@WebParam(name="personId") Long id, @WebParam(name="measureType") String measureType);
+    @WebResult(name="healthProfile-history")
+    public HealthProfileHistory readPersonHistory(@WebParam(name="personId") Long id, @WebParam(name="measureType") String measureType);
     
     @WebMethod(operationName="readMeasureTypes")
     @WebResult(name="measureTypes") 
     public List<MeasureType> readMeasureTypes();
     
-    @WebMethod(operationName="readPersonMeasure")
+    @WebMethod(operationName="readPersonMeasurement")
     @WebResult(name="measure")
-    public Measure readPersonMeasure(@WebParam(name="personId") Long id, @WebParam(name="measureType") String measureType, @WebParam(name="measureId") Long mid);
+    public Measure readPersonMeasurement(@WebParam(name="personId") Long id, @WebParam(name="measureType") String measureType, @WebParam(name="measureId") Long mid);
     
-    @WebMethod(operationName="savePersonMeasure")
+    @WebMethod(operationName="savePersonMeasurement")
     @WebResult(name="measure")
-    public Measure savePersonMeasure(@WebParam(name="personId") Long id,@WebParam(name="measure")  Measure m);
+    public Measure savePersonMeasurement(@WebParam(name="personId") Long id,@WebParam(name="measure")  Measure m);
     
     @WebMethod(operationName="updatePersonMeasure")
     @WebResult(name="measure")
