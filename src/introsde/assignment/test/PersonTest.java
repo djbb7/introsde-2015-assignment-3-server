@@ -88,8 +88,46 @@ public class PersonTest {
 	}
 	
 	@Test
-	public void createPersonWithHealthProfileTest(){
-		System.out.println("--> TEST: createPersonWithHealthProfile");
+	public void createPersonWithCurrentHealthTest(){
+		System.out.println("--> TEST: createPersonWithHealthHistory");
+		
+		Person p = new Person();
+		p.setFirstname("Miguel");
+		p.setLastname("Frances");
+		Calendar c = Calendar.getInstance();
+		c.set(1974, 5, 3, 0 ,0 ,0);
+		p.setBirthdate(c.getTime());
+		
+		List<Measure> currentHealth = new ArrayList<Measure>();
+		MeasureType weight = MeasureType.getMeasureTypeByName("weight");
+		MeasureType height = MeasureType.getMeasureTypeByName("height");
+		Measure m1 = new Measure();
+		m1.setMeasureType(weight);
+		m1.setDateRegistered(c.getTime());
+		m1.setMeasureValue("5");
+		Measure m2 = new Measure();
+		m2.setMeasureType(height);
+		m2.setMeasureValue("165");
+		currentHealth.add(m1);
+		currentHealth.add(m2);
+		p.setCurrentHealth(currentHealth);
+		
+		Person savedP = Person.savePerson(p);
+	
+		//read person
+		Person newP = Person.getPersonById(savedP.getId());
+		Assert.assertNotNull(newP);
+		
+		//check measurements are present
+		Assert.assertNotNull(newP.getHealthHistory());
+		Assert.assertEquals(newP.getHealthHistory().size(), 2);
+		System.out.println("-->Date: "+newP.getHealthHistory().get(0).getDateRegistered());
+		System.out.println("-->Date: "+newP.getHealthHistory().get(1).getDateRegistered());
+	}
+	
+	@Test
+	public void createPersonWithHealthHistoryTest(){
+		System.out.println("--> TEST: createPersonWithHealthHistory");
 		
 		Person p = new Person();
 		p.setFirstname("Sonia");

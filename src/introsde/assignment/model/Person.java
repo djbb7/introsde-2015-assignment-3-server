@@ -52,7 +52,7 @@ public class Person {
 	@Column(name="birthdate")
 	private Date birthdate;
 	
-	@OneToMany(cascade=CascadeType.REMOVE, targetEntity=CurrentHealth.class)
+	@OneToMany(targetEntity=CurrentHealth.class)
 	@JoinColumn(name="idPerson", referencedColumnName="id", nullable=false, updatable=false, insertable=false)
 	private List<Measure> currentHealth; // one for each type of measure
 	
@@ -135,6 +135,13 @@ public class Person {
 	
 	public static Person savePerson(Person p) {
 		p.setId(0L);
+		if(p.getCurrentHealth() != null){
+			p.setHealthHistory(p.getCurrentHealth());
+			for(Measure m: p.getCurrentHealth()){
+				MeasureType mT = m.getMeasureType();
+				m.setMeasureType(MeasureType.getMeasureTypeByName(mT.getMeasureType()));
+			}
+		}
 		EntityManager em = PersonMeasureDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -148,7 +155,14 @@ public class Person {
 		EntityManager em = PersonMeasureDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		p=em.merge(p);
+		Person storedP = em.find(Person.class, p.getId());
+		if(p.getBirthdate() != null)
+			storedP.setBirthdate(p.getBirthdate());
+		if(p.getFirstname() != null)
+			storedP.setFirstname(p.getFirstname());
+		if(p.getLastname() != null)
+			storedP.setLastname(p.getLastname());
+		p=em.merge(storedP);
 		tx.commit();
 	    PersonMeasureDao.instance.closeConnections(em);
 	    return p;

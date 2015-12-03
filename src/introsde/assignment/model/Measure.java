@@ -2,7 +2,9 @@ package introsde.assignment.model;
 
 import introsde.assignment.dao.PersonMeasureDao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +35,14 @@ import javax.xml.bind.annotation.XmlTransient;
 					+ "WHERE m.person.id=:person "
 					+ "AND m.measureType.measureType=:measureType "
 					+ "AND m.mid=:mid"
-			)
+		),
+		@NamedQuery(name="Measure.findMeasureHistory",
+				query="SELECT m "
+					+ "FROM Measure m "
+					+ "WHERE m.person.id=:person "
+					+ "AND m.measureType.measureType=:measureType "
+					+ "ORDER BY m.dateRegistered DESC"
+		)
 })
 public class Measure {
 	
@@ -121,6 +130,22 @@ public class Measure {
 		}
 		PersonMeasureDao.instance.closeConnections(em);
 		return m;
+	}
+	
+	
+	public static List<Measure> getMeasureHistory(long personId, String measureType){
+		EntityManager em = PersonMeasureDao.instance.createEntityManager();
+		List<Measure> history;
+		try {
+			history = em.createNamedQuery("Measure.findMeasureHistory", Measure.class)
+					.setParameter("person", personId)
+					.setParameter("measureType", measureType)
+					.getResultList();
+		} catch (NoResultException e) {
+			history = new ArrayList<Measure>();
+		}
+		PersonMeasureDao.instance.closeConnections(em);
+		return history;
 	}
 	
 }

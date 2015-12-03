@@ -64,16 +64,20 @@ public class PeopleImpl implements People {
 	}
 
 	@Override
-	public int deletePerson(Long id) {
+	public boolean deletePerson(Long id) {
 		Person del = Person.getPersonById(id);
-		if(del != null)
-			Person.removePerson(del);
-		return -1;
+		if(del == null){
+			return false;
+		}
+		Person.removePerson(del);
+		return true;
 	}
 
 	@Override
 	public List<Measure> readPersonHistory(Long id, String measureType) {
-		return null;
+		Person p = new Person();
+		p.setHealthHistory(Measure.getMeasureHistory(id, measureType));
+		return p.getHealthHistory();
 	}
 
 	@Override

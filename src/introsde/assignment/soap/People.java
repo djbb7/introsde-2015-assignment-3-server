@@ -13,6 +13,7 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.jws.soap.SOAPBinding.Use;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 @WebService
 @SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
@@ -35,12 +36,12 @@ public interface People {
     public Person createPerson(@WebParam(name="person") Person person);
     
     @WebMethod(operationName="deletePerson")
-    @WebResult(name="personId") 
-    public int deletePerson(@WebParam(name="personId") Long id);
+    @WebResult(name="deleted") 
+    public boolean deletePerson(@WebParam(name="personId") Long id);
     
     @WebMethod(operationName="readPersonHistory")
-    @WebResult(name="measures")
-    public List<Measure> readPersonHistory(Long id, String measureType);
+    @WebResult(name="measure")
+    public List<Measure> readPersonHistory(@WebParam(name="personId") Long id, @WebParam(name="measureType") String measureType);
     
     @WebMethod(operationName="readMeasureTypes")
     @WebResult(name="measureTypes") 
@@ -48,15 +49,15 @@ public interface People {
     
     @WebMethod(operationName="readPersonMeasure")
     @WebResult(name="measure")
-    public Measure readPersonMeasure(Long id, String measureType, Long mid);
+    public Measure readPersonMeasure(@WebParam(name="personId") Long id, @WebParam(name="measureType") String measureType, @WebParam(name="measureId") Long mid);
     
     @WebMethod(operationName="savePersonMeasure")
     @WebResult(name="measure")
-    public Measure savePersonMeasure(Long id, Measure m);
+    public Measure savePersonMeasure(@WebParam(name="personId") Long id,@WebParam(name="measure")  Measure m);
     
     @WebMethod(operationName="updatePersonMeasure")
     @WebResult(name="measure")
-    public Measure updatePersonMeasure(Long id, Measure m);
+    public Measure updatePersonMeasure(@WebParam(name="personId") Long id, @WebParam(name="measure") Measure m);
     
     
     
