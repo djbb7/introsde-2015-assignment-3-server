@@ -82,6 +82,7 @@ public class Person {
 	}
 
 	@XmlElementWrapper(name="currentHealth")
+	@XmlElement(name="measure")
 	public List<Measure> getCurrentHealth() {
 		return currentHealth;
 	}
@@ -134,19 +135,15 @@ public class Person {
 	
 	public static Person savePerson(Person p) {
 		p.setId(0L);
-		if(p.getCurrentHealth() != null){
-			p.setHealthHistory(p.getCurrentHealth());
-			for(Measure m: p.getCurrentHealth()){
-				MeasureType mT = m.getMeasureType();
-				m.setMeasureType(MeasureType.getMeasureTypeByName(mT.getMeasureType()));
-			}
-		}
+		p.setCurrentHealth(p.getHealthHistory());
+
 		EntityManager em = PersonMeasureDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		em.persist(p);
 		tx.commit();
 	    PersonMeasureDao.instance.closeConnections(em);
+	    
 	    return p;
 	}
 	

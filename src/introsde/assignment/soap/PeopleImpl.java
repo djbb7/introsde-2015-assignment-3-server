@@ -4,6 +4,10 @@ import introsde.assignment.model.HealthProfileHistory;
 import introsde.assignment.model.Measure;
 import introsde.assignment.model.MeasureType;
 import introsde.assignment.model.Person;
+import introsde.assignment.model.request.MeasureCreateRequest;
+import introsde.assignment.model.request.PersonCreateRequest;
+import introsde.assignment.model.request.PersonUpdateRequest;
+import introsde.assignment.model.response.MeasureTypesResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -55,13 +59,15 @@ public class PeopleImpl implements People {
 	}
 
 	@Override
-	public Person updatePerson(Person person) {
-		return Person.updatePerson(person);
+	public Person updatePerson(PersonUpdateRequest person) {
+		Person p = PersonUpdateRequest.createPersonObject(person);
+		return Person.updatePerson(p);
 	}
 
 	@Override
-	public Person createPerson(Person person) {
-		return Person.savePerson(person);
+	public Person createPerson(PersonCreateRequest person) {
+		Person p = PersonCreateRequest.createPersonObject(person);
+		return Person.savePerson(p);
 	}
 
 	@Override
@@ -87,8 +93,9 @@ public class PeopleImpl implements People {
 	}
 	
 	@Override
-	public Measure savePersonMeasurement(Long id, Measure m) {
+	public Measure savePersonMeasurement(Long id, MeasureCreateRequest mCR) {
 		Person p = Person.getPersonById(id);
+		Measure m = MeasureCreateRequest.createMeasureObject(mCR);
 		Person.addMeasure(p, m);
 		return m;
 	}
@@ -101,8 +108,8 @@ public class PeopleImpl implements People {
 	}
 	
 	@Override
-	public List<MeasureType> readMeasureTypes() {
-		return MeasureType.getMeasureTypes();
+	public MeasureTypesResponse readMeasureTypes() {
+		return new MeasureTypesResponse(MeasureType.getMeasureTypes());
 	}
 
 

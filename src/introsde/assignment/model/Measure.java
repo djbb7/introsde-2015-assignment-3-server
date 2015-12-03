@@ -62,7 +62,7 @@ public class Measure {
 	private String measureValue;
 	
 	@OneToOne
-	@JoinColumn(name="idMeasureType",referencedColumnName="id",insertable=false,updatable=false)
+	@JoinColumn(name="idMeasureType",referencedColumnName="id")
 	private MeasureType measureType;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
