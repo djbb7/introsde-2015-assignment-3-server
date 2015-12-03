@@ -36,25 +36,6 @@ public class PeopleImpl implements People {
 
 	@Override
 	public Person readPerson(Long id) {
-		try{
-			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			Marshaller marshaller = JAXBContext.newInstance(Person.class).createMarshaller();
-			marshaller.marshal(Person.getPersonById(id), document);
-			SOAPMessage soapMessage = MessageFactory.newInstance().createMessage();
-			soapMessage.getSOAPBody().addDocument(document);
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			soapMessage.writeTo(outputStream);
-			String output = new String(outputStream.toByteArray());
-			System.out.println(output);
-			} catch (ParserConfigurationException e){
-				System.out.println("Parser "+ e.getMessage());
-			} catch (JAXBException e){
-				System.out.println("JAXB "+e.getMessage());
-			} catch (SOAPException e){
-				System.out.println("SOAP "+e.getMessage());
-			} catch (IOException e){			
-				System.out.println("IO "+e.getMessage());
-			}
 		return Person.getPersonById(id);
 	}
 
