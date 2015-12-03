@@ -10,20 +10,7 @@ import introsde.assignment.model.request.PersonUpdateRequest;
 import introsde.assignment.model.response.MeasureTypesResponse;
 import introsde.assignment.model.response.PeopleResponse;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
 import javax.jws.WebService;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.soap.MessageFactory;
-import javax.xml.soap.SOAPException;
-import javax.xml.soap.SOAPMessage;
-
-import org.w3c.dom.Document;
 
 
 @WebService(endpointInterface="introsde.assignment.soap.People", serviceName="People")

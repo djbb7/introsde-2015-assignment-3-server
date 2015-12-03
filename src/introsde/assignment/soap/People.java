@@ -9,8 +9,6 @@ import introsde.assignment.model.request.PersonUpdateRequest;
 import introsde.assignment.model.response.MeasureTypesResponse;
 import introsde.assignment.model.response.PeopleResponse;
 
-import java.util.List;
-
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
