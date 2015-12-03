@@ -7,6 +7,7 @@ import introsde.assignment.model.request.MeasureCreateRequest;
 import introsde.assignment.model.request.PersonCreateRequest;
 import introsde.assignment.model.request.PersonUpdateRequest;
 import introsde.assignment.model.response.MeasureTypesResponse;
+import introsde.assignment.model.response.PeopleResponse;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface People {
 	
 	@WebMethod(operationName="readPersonList")
 	@WebResult(name="people")
-	public List<Person> readPeopleList();
+	public PeopleResponse readPeopleList();
 	
     @WebMethod(operationName="readPerson")
     @WebResult(name="person") 
@@ -46,32 +47,23 @@ public interface People {
     @WebResult(name="healthProfile-history")
     public HealthProfileHistory readPersonHistory(@WebParam(name="personId") Long id, @WebParam(name="measureType") String measureType);
     
-    @WebMethod(operationName="readPersonMeasurement")
-    @WebResult(name="measure")
-    public Measure readPersonMeasurement(@WebParam(name="personId") Long id, @WebParam(name="measureType") String measureType, @WebParam(name="measureId") Long mid);
-    
-    @WebMethod(operationName="savePersonMeasurement")
-    @WebResult(name="measure")
-    public Measure savePersonMeasurement(@WebParam(name="personId") Long id,@WebParam(name="measure")  MeasureCreateRequest m);
-
     @WebMethod(operationName="readMeasureTypes")
     @WebResult(name="measureTypes") 
     public MeasureTypesResponse readMeasureTypes();
     
+    @WebMethod(operationName="readPersonMeasure")
+    @WebResult(name="measure")
+    public Measure readPersonMeasure(@WebParam(name="personId") Long id, @WebParam(name="measureType") String measureType, @WebParam(name="measureId") Long mid);
+    
+    @WebMethod(operationName="savePersonMeasure")
+    @WebResult(name="measure")
+    public Measure savePersonMeasure(@WebParam(name="personId") Long id,@WebParam(name="measure")  MeasureCreateRequest m);
+    
     @WebMethod(operationName="updatePersonMeasure")
     @WebResult(name="measure")
     public Measure updatePersonMeasure(@WebParam(name="personId") Long id, @WebParam(name="measure") Measure m);
-    
-    
-    
+   
     /*
- 	 * Extra points
- 	 * 
- 	 * 
-    @WebMethod(operationName="updatePersonMeasure")
-    @WebResult(name="measure")
-    public Measure updatePersonMeasure(Long id, Measure m); 	 
- 	 
     @WebMethod(operationName="readPersonMeasureByDates")
     @WebResult(name="measures")
     public List<Measure> readPersonMeasureByDates(Long id, String measureType, Date before, Date after);

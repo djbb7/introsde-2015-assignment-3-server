@@ -8,10 +8,10 @@ import introsde.assignment.model.request.MeasureCreateRequest;
 import introsde.assignment.model.request.PersonCreateRequest;
 import introsde.assignment.model.request.PersonUpdateRequest;
 import introsde.assignment.model.response.MeasureTypesResponse;
+import introsde.assignment.model.response.PeopleResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 import javax.jws.WebService;
 import javax.xml.bind.JAXBContext;
@@ -30,8 +30,8 @@ import org.w3c.dom.Document;
 public class PeopleImpl implements People {
 
 	@Override
-	public List<Person> readPeopleList() {
-		return Person.getAll();
+	public PeopleResponse readPeopleList() {
+		return new PeopleResponse(Person.getAll());
 	}
 
 	@Override
@@ -88,12 +88,12 @@ public class PeopleImpl implements People {
 	}
 
 	@Override
-	public Measure readPersonMeasurement(Long id, String measureType, Long mid) {
+	public Measure readPersonMeasure(Long id, String measureType, Long mid) {
 		return Measure.getMeasureById(id, measureType, mid);
 	}
 	
 	@Override
-	public Measure savePersonMeasurement(Long id, MeasureCreateRequest mCR) {
+	public Measure savePersonMeasure(Long id, MeasureCreateRequest mCR) {
 		Person p = Person.getPersonById(id);
 		Measure m = MeasureCreateRequest.createMeasureObject(mCR);
 		Person.addMeasure(p, m);
