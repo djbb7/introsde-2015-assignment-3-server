@@ -6,12 +6,7 @@ import introsde.assignment.model.Person;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class PersonCreateRequest {
+public class PersonCreate {
 	
 	private String firstname;
 
@@ -19,9 +14,9 @@ public class PersonCreateRequest {
 	
 	private Date birthdate;
 	
-	private List<MeasureCreateRequest> currentHealth;
+	private List<MeasureCreate> currentHealth;
 	
-	public PersonCreateRequest(){
+	public PersonCreate(){
 		
 	}
 
@@ -37,9 +32,7 @@ public class PersonCreateRequest {
 		return birthdate;
 	}
 	
-	@XmlElementWrapper(name="currentHealth")
-	@XmlElement(name="measure")
-	public List<MeasureCreateRequest> getCurrentHealth() {
+	public List<MeasureCreate> getCurrentHealth() {
 		return currentHealth;
 	}
 
@@ -55,17 +48,17 @@ public class PersonCreateRequest {
 		this.birthdate = birthdate;
 	}
 
-	public void setCurrentHealth(List<MeasureCreateRequest> currentHealth) {
+	public void setCurrentHealth(List<MeasureCreate> currentHealth) {
 		this.currentHealth = currentHealth;
 	}
 	
-	public static Person createPersonObject(PersonCreateRequest pR){
+	public static Person createPersonObject(PersonCreate pR){
 		Person p = new Person();
 		p.setFirstname(pR.getFirstname());
 		p.setLastname(pR.getLastname());
 		p.setBirthdate(pR.getBirthdate());
 		
-		List<Measure> mList = MeasureCreateRequest.createMeasureListObject(pR.getCurrentHealth());
+		List<Measure> mList = MeasureCreate.createMeasureListObject(pR.getCurrentHealth());
 		p.setHealthHistory(mList);
 		return p;
 	}

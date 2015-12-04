@@ -12,12 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="MeasureType")
-@NamedQuery(name="MeasureType.findAll", query="SELECT m.measureType FROM MeasureType m")
-@XmlRootElement
+@NamedQuery(name="MeasureType.findAll", query="SELECT m FROM MeasureType m")
 public class MeasureType {
 
 	@Id

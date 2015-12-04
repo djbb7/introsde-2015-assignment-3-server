@@ -21,16 +21,12 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="Person")
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
-@XmlRootElement
 @XmlSeeAlso(CurrentHealth.class)
 public class Person {
 
@@ -81,8 +77,6 @@ public class Person {
 		return birthdate;
 	}
 
-	@XmlElementWrapper(name="currentHealth")
-	@XmlElement(name="measure")
 	public List<Measure> getCurrentHealth() {
 		return currentHealth;
 	}
@@ -185,14 +179,14 @@ public class Person {
 		EntityManager em = PersonMeasureDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		m = em.merge(m);
+		em.persist(m);
 		tx.commit();
 		PersonMeasureDao.instance.closeConnections(em);
 		return m;
 	}
 	
 	
-	public static void updateMeasure(Person p, Measure m){
+	public static Measure updateMeasure(Person p, Measure m){
 		List<Measure> history = p.getHealthHistory();
 		if(history == null)
 			history = new ArrayList<Measure>();
@@ -210,5 +204,6 @@ public class Person {
 		p=em.merge(p);
 		tx.commit();
 	    PersonMeasureDao.instance.closeConnections(em);
+	    return m;
 	}
 }

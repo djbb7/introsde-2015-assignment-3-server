@@ -3,11 +3,12 @@ package introsde.assignment.soap;
 import introsde.assignment.model.HealthProfileHistory;
 import introsde.assignment.model.Measure;
 import introsde.assignment.model.Person;
-import introsde.assignment.model.request.MeasureCreateRequest;
-import introsde.assignment.model.request.PersonCreateRequest;
-import introsde.assignment.model.request.PersonUpdateRequest;
-import introsde.assignment.model.response.MeasureTypesResponse;
-import introsde.assignment.model.response.PeopleResponse;
+import introsde.assignment.model.request.MeasureCreate;
+import introsde.assignment.model.request.MeasureUpdate;
+import introsde.assignment.model.request.PersonCreate;
+import introsde.assignment.model.request.PersonUpdate;
+import introsde.assignment.model.response.MeasureTypes;
+import introsde.assignment.model.response.PeopleList;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -23,7 +24,7 @@ public interface People {
 	
 	@WebMethod(operationName="readPersonList")
 	@WebResult(name="people")
-	public PeopleResponse readPeopleList();
+	public PeopleList readPeopleList();
 	
     @WebMethod(operationName="readPerson")
     @WebResult(name="person") 
@@ -31,11 +32,11 @@ public interface People {
  
     @WebMethod(operationName="updatePerson")
     @WebResult(name="person") 
-    public Person updatePerson(@WebParam(name="person") PersonUpdateRequest person);
+    public Person updatePerson(@WebParam(name="person") PersonUpdate person);
     
     @WebMethod(operationName="createPerson")
     @WebResult(name="person") 
-    public Person createPerson(@WebParam(name="person") PersonCreateRequest person);
+    public Person createPerson(@WebParam(name="person") PersonCreate person);
     
     @WebMethod(operationName="deletePerson")
     @WebResult(name="deleted") 
@@ -47,7 +48,7 @@ public interface People {
     
     @WebMethod(operationName="readMeasureTypes")
     @WebResult(name="measureTypes") 
-    public MeasureTypesResponse readMeasureTypes();
+    public MeasureTypes readMeasureTypes();
     
     @WebMethod(operationName="readPersonMeasure")
     @WebResult(name="measure")
@@ -55,11 +56,11 @@ public interface People {
     
     @WebMethod(operationName="savePersonMeasure")
     @WebResult(name="measure")
-    public Measure savePersonMeasure(@WebParam(name="personId") Long id,@WebParam(name="measure")  MeasureCreateRequest m);
+    public Measure savePersonMeasure(@WebParam(name="personId") Long id,@WebParam(name="measure")  MeasureCreate m);
     
     @WebMethod(operationName="updatePersonMeasure")
     @WebResult(name="measure")
-    public Measure updatePersonMeasure(@WebParam(name="personId") Long id, @WebParam(name="measure") Measure m);
+    public Measure updatePersonMeasure(@WebParam(name="personId") Long id, @WebParam(name="measure") MeasureUpdate m);
    
     /*
     @WebMethod(operationName="readPersonMeasureByDates")

@@ -4,23 +4,18 @@ import introsde.assignment.model.MeasureType;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class MeasureTypesResponse {
+public class MeasureTypes {
 	
 	private List<MeasureType> measureTypes;
 	
-	public MeasureTypesResponse(){
+	public MeasureTypes(){
 		
 	}
 	
-	public MeasureTypesResponse(List<MeasureType> m){
+	public MeasureTypes(List<MeasureType> m){
 		measureTypes = m;
 	}
 
-	@XmlElement(name="measureType")
 	public List<MeasureType> getMeasureTypes() {
 		return measureTypes;
 	}

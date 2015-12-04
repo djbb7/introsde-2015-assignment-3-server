@@ -4,11 +4,12 @@ import introsde.assignment.model.HealthProfileHistory;
 import introsde.assignment.model.Measure;
 import introsde.assignment.model.MeasureType;
 import introsde.assignment.model.Person;
-import introsde.assignment.model.request.MeasureCreateRequest;
-import introsde.assignment.model.request.PersonCreateRequest;
-import introsde.assignment.model.request.PersonUpdateRequest;
-import introsde.assignment.model.response.MeasureTypesResponse;
-import introsde.assignment.model.response.PeopleResponse;
+import introsde.assignment.model.request.MeasureCreate;
+import introsde.assignment.model.request.MeasureUpdate;
+import introsde.assignment.model.request.PersonCreate;
+import introsde.assignment.model.request.PersonUpdate;
+import introsde.assignment.model.response.MeasureTypes;
+import introsde.assignment.model.response.PeopleList;
 
 import javax.jws.WebService;
 
@@ -17,8 +18,8 @@ import javax.jws.WebService;
 public class PeopleImpl implements People {
 
 	@Override
-	public PeopleResponse readPeopleList() {
-		return new PeopleResponse(Person.getAll());
+	public PeopleList readPeopleList() {
+		return new PeopleList(Person.getAll());
 	}
 
 	@Override
@@ -27,14 +28,14 @@ public class PeopleImpl implements People {
 	}
 
 	@Override
-	public Person updatePerson(PersonUpdateRequest person) {
-		Person p = PersonUpdateRequest.createPersonObject(person);
+	public Person updatePerson(PersonUpdate person) {
+		Person p = PersonUpdate.createPersonObject(person);
 		return Person.updatePerson(p);
 	}
 
 	@Override
-	public Person createPerson(PersonCreateRequest person) {
-		Person p = PersonCreateRequest.createPersonObject(person);
+	public Person createPerson(PersonCreate person) {
+		Person p = PersonCreate.createPersonObject(person);
 		return Person.savePerson(p);
 	}
 
@@ -61,23 +62,23 @@ public class PeopleImpl implements People {
 	}
 	
 	@Override
-	public Measure savePersonMeasure(Long id, MeasureCreateRequest mCR) {
+	public Measure savePersonMeasure(Long id, MeasureCreate mCR) {
 		Person p = Person.getPersonById(id);
-		Measure m = MeasureCreateRequest.createMeasureObject(mCR);
+		Measure m = MeasureCreate.createMeasureObject(mCR);
 		Person.addMeasure(p, m);
 		return m;
 	}
 
 	@Override
-	public Measure updatePersonMeasure(Long id, Measure m){
+	public Measure updatePersonMeasure(Long id, MeasureUpdate m){
 		Person p = Person.getPersonById(id);
-		Person.updateMeasure(p, m);
-		return m;
+		Measure n = Person.updateMeasure(p, MeasureUpdate.createMeasureObject(id, m));
+		return n;
 	}
 	
 	@Override
-	public MeasureTypesResponse readMeasureTypes() {
-		return new MeasureTypesResponse(MeasureType.getMeasureTypes());
+	public MeasureTypes readMeasureTypes() {
+		return new MeasureTypes(MeasureType.getMeasureTypes());
 	}
 
 

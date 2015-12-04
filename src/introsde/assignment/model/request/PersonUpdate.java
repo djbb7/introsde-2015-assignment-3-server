@@ -4,10 +4,7 @@ import introsde.assignment.model.Person;
 
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class PersonUpdateRequest {
+public class PersonUpdate {
 	
 	private Long id;
 
@@ -17,7 +14,7 @@ public class PersonUpdateRequest {
 	
 	private Date birthdate;
 	
-	public PersonUpdateRequest(){
+	public PersonUpdate(){
 		
 	}
 
@@ -53,7 +50,7 @@ public class PersonUpdateRequest {
 		this.birthdate = birthdate;
 	}
 	
-	public static Person createPersonObject(PersonUpdateRequest pR){
+	public static Person createPersonObject(PersonUpdate pR){
 		Person p = new Person();
 		p.setId(pR.getId());
 		p.setFirstname(pR.getFirstname());

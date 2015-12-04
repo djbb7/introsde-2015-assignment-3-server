@@ -7,10 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class MeasureCreateRequest {
+public class MeasureCreate {
 
 	private Date dateRegistered = new Date();
 	
@@ -18,7 +15,7 @@ public class MeasureCreateRequest {
 	
 	private String measureType;
 	
-	public MeasureCreateRequest(){
+	public MeasureCreate(){
 		
 	}
 
@@ -46,7 +43,7 @@ public class MeasureCreateRequest {
 		this.measureType = measureType;
 	}
 	
-	public static Measure createMeasureObject(MeasureCreateRequest mR){
+	public static Measure createMeasureObject(MeasureCreate mR){
 		MeasureType mType = MeasureType.getMeasureTypeByName(mR.getMeasureType());
 		if(mType == null)
 			return null;
@@ -58,10 +55,12 @@ public class MeasureCreateRequest {
 		return m;
 	}
 	
-	public static List<Measure> createMeasureListObject(List<MeasureCreateRequest> mRList){
+	public static List<Measure> createMeasureListObject(List<MeasureCreate> mRList){
+		if(mRList == null)
+			mRList = new ArrayList<MeasureCreate>();
 		ArrayList<Measure> mList = new ArrayList<Measure>();
-		for(MeasureCreateRequest mR : mRList){
-			mList.add(MeasureCreateRequest.createMeasureObject(mR));
+		for(MeasureCreate mR : mRList){
+			mList.add(MeasureCreate.createMeasureObject(mR));
 		}
 		return mList;
 	}

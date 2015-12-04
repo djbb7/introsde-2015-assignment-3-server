@@ -4,23 +4,18 @@ import introsde.assignment.model.Person;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class PeopleResponse {
+public class PeopleList {
 
 	private List<Person> people;
 	
-	public PeopleResponse(){
+	public PeopleList(){
 		
 	}
 	
-	public PeopleResponse(List<Person> p){
+	public PeopleList(List<Person> p){
 		this.people = p;
 	}
 
-	@XmlElement(name="person")
 	public List<Person> getPeople() {
 		return people;
 	}
