@@ -188,11 +188,13 @@ public class Person {
 	
 	public static Measure updateMeasure(Person p, Measure m){
 		List<Measure> history = p.getHealthHistory();
-		if(history == null)
+		if(history == null){
 			history = new ArrayList<Measure>();
-		
+			p.setHealthHistory(history);
+			history.add(m);
+		}
 		for(int i=0; i<history.size(); i++){
-			if(history.get(i).getMid() != m.getMid()){
+			if(history.get(i).getMid().longValue() != m.getMid().longValue()){
 				continue;
 			}
 			history.set(i, m);
