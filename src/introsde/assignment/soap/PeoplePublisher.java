@@ -26,6 +26,6 @@ public class PeoplePublisher {
         URI BASE_URI = new URI(protocol + hostname + port);
 
 		Endpoint.publish(BASE_URI.toString()+"ws/people", new PeopleImpl());
-		System.out.println("SOAP server started at: "+BASE_URI.toString()+"/ws/people");
+		System.out.println("SOAP server started at: "+BASE_URI.toString()+"ws/people");
 	}
 }
