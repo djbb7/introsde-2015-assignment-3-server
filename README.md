@@ -23,6 +23,21 @@ The project is divided into 6 packages. Each package contains:
 
 `introsde.assignment.test`: Unit tests for functionality.
 
+##Methods Implemented
+
+The methods the Web Service offers correspond to the following operations:
+
+*`readPersonList()` => Lists all the people in the database.
+*`readPerson(Long id)` => Gives all the Personal information plus current measures of one Person identified by {id} (e.g., current measures means the latest measure of each measure type).
+*`updatePerson(Person p)` => Updates the personal information of the Person identified by {id} (e.g., only the Person's information, not the measures of the health profile).
+*`createPerson(Person p)` => Creates a new Person and returns the newly created Person with its assigned id (if a health profile is included, it also creates those measures for the new Person).
+*`deletePerson(Long id)` => deletes the Person identified by {id} from the database.
+*`readPersonHistory(Long id, String measureType) => Lists all the values (the history) of {measureType} (e.g. weight) for the Person identified by {id}.
+*`readMeasureTypes()` => Lists all the types of measures.
+*`readPersonMeasure(Long id, String measureType, Long mid)` => Returns the value of {measureType} (e.g. weight) identified by {mid} for Person identified by {id}.
+*`savePersonMeasure(Long id, Measure m)` => Saves a new measure {m} (e.g. weight) of Person identified by {id} and archive the old value in the history.
+*`updatePersonMeasure(Long id, Measure m)` => Update the measure identified with {m.mid}, related to the Person identified by {id}.
+
 ##Files included
 
 The project contains some additional files.
