@@ -1,7 +1,5 @@
 # introsde-2015-assignment-3-server
 
-###Server
-
 This project implements a SOAP Web Service for managing (CRUD) a database of people and the history of their health measurements (i.e. weight, height, steps walked). It is an assignment for the Introduction to Service Design and Engineering lecture at UNITN, Winter Semester 2015-16.
 
 The project is implemented in Java using stardard javax.ws, JAXB and JPA. Communication is Document based. The database is a simple sqlite file.
@@ -13,7 +11,7 @@ The project includes a client as well which you can find here ([introsde-2015-as
 
 The project is divided into 6 packages. Each package contains:
 
-`introsde.assignment.dao`: Handling Java Persistence Entity Manager.
+`introsde.assignment.dao`: Class for handling Java Persistence Entity Manager.
 
 `introsde.assignment.model`: JPA Entities.
 
@@ -44,4 +42,9 @@ ant install
 To start the standalone server run:
 ```
 ant run
+```
+
+For running unit tests run:
+```
+ant junit
 ```
