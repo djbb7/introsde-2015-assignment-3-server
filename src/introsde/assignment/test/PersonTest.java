@@ -14,6 +14,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * Units tests to make sure all the operations on Person are working 
+ * as expected.
+ */
 public class PersonTest {
         
 	@BeforeClass
@@ -30,6 +34,9 @@ public class PersonTest {
     }
 
 
+    /**
+     * Read and return all Person's in the database.
+     */
 	@Test
 	public void readPeopleListTest() {
         System.out.println("--> TEST: readPeopleList");
@@ -40,6 +47,9 @@ public class PersonTest {
         Assert.assertTrue(list.size()>0);
     }
 	
+	/**
+	 * Perform all CRUD operations on Person object.
+	 */
 	@Test
 	public void personCRUDTest(){
 		System.out.println("--> TEST: personCRUD");
@@ -86,11 +96,15 @@ public class PersonTest {
 		Assert.assertNull(readP);
 	}
 	
-	
+	/**
+	 * Create a Person with some Measures right from the moment
+	 * the Person object is stored.
+	 */
 	@Test
 	public void createPersonWithHealthHistoryTest(){
 		System.out.println("--> TEST: createPersonWithHealthHistory");
 		
+		//Create the Person object with some Measures
 		Person p = new Person();
 		p.setFirstname("Sonia");
 		p.setLastname("Perez");
@@ -126,8 +140,12 @@ public class PersonTest {
 		System.out.println("-->Date: "+newP.getHealthHistory().get(1).getDateRegistered());
 	}
 	
+	/**
+	 * Creating a Measure for an existing Person.
+	 */
 	@Test
 	public void createMeasureTest(){
+		
 		Person p = Person.getAll().get(0);
 		int prev = p.getHealthHistory().size();
 		System.out.println("----->Number of measures: "+prev);
@@ -146,6 +164,9 @@ public class PersonTest {
 		Assert.assertEquals(prev+1, post);
 	}
 	
+	/**
+	 * Update an existing measure.
+	 */
 	@Test
 	public void updateMeasureTest(){
 		System.out.println("--> TEST: updateMeasure");
@@ -156,6 +177,7 @@ public class PersonTest {
 		
 		Person.updateMeasure(p, m);
 		
+		//check it was updated.
 		Assert.assertEquals("71", p.getHealthHistory().get(0).getMeasureValue());
 	}
 	

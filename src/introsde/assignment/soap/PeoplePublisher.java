@@ -13,6 +13,7 @@ public class PeoplePublisher {
 		
 		String protocol = "http://";
         String port_value = "6903";
+        //Special checks in case the program is running in heroku
         if (String.valueOf(System.getenv("PORT")) != "null"){
             port_value=String.valueOf(System.getenv("PORT"));
         }

@@ -16,6 +16,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ * Represents a person's latest measurements.
+ * For consistency, this is implemented using the table 'CurrentHealth'
+ * which is in reality a stored view.
+ */
 @Entity
 @Table(name="CurrentHealth")
 public class CurrentHealth {

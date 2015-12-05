@@ -18,6 +18,9 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.jws.soap.SOAPBinding.Use;
 
+/**
+ * Interface that represents the operations provided by the web service.
+ */
 @WebService
 @SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
 public interface People {
@@ -62,14 +65,4 @@ public interface People {
     @WebResult(name="measure")
     public Measure updatePersonMeasure(@WebParam(name="personId") Long id, @WebParam(name="measure") MeasureUpdate m);
    
-    /*
-    @WebMethod(operationName="readPersonMeasureByDates")
-    @WebResult(name="measures")
-    public List<Measure> readPersonMeasureByDates(Long id, String measureType, Date before, Date after);
-
-	@WebMethod(operationName="readPersonListByMeasurement")
-    @WebResult(name="people")
-    public List<Person> (String measureType, String maxValue, String minValue); 
-    
-     */
 }

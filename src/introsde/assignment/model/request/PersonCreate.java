@@ -6,6 +6,14 @@ import introsde.assignment.model.Person;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This class represents the Person object that is 
+ * expected from the client in order to create a new
+ * Person.
+ * 
+ * It is a simplified version of the Person class (no id
+ * for example).
+ */
 public class PersonCreate {
 	
 	private String firstname;

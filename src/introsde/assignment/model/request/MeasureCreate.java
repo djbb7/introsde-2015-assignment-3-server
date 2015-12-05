@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Represents the Measure object that a client needs
+ * to send in order to create a new Measure.
+ * 
+ * It is a stripped down version of Measure (no id, for example)
+ */
 public class MeasureCreate {
 
 	private Date dateRegistered = new Date();

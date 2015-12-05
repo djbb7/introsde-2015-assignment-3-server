@@ -13,7 +13,9 @@ import introsde.assignment.model.response.PeopleList;
 
 import javax.jws.WebService;
 
-
+/**
+ * Implementation of the web service operations.
+ */
 @WebService(endpointInterface="introsde.assignment.soap.People", serviceName="People")
 public class PeopleImpl implements People {
 
@@ -80,7 +82,4 @@ public class PeopleImpl implements People {
 	public MeasureTypes readMeasureTypes() {
 		return new MeasureTypes(MeasureType.getMeasureTypes());
 	}
-
-
-
 }

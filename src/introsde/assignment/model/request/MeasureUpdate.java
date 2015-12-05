@@ -5,6 +5,10 @@ import introsde.assignment.model.MeasureType;
 
 import java.util.Date;
 
+/**
+ * Represents the Measure object that a client needs
+ * to send in order to update a Measure.
+ */
 public class MeasureUpdate {
 
 	private Long mid;

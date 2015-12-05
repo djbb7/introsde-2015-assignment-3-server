@@ -4,6 +4,10 @@ import introsde.assignment.model.Person;
 
 import java.util.List;
 
+/**
+ * Convenience wrapper for returning the list of
+ * all people to the client.
+ */
 public class PeopleList {
 
 	private List<Person> people;

@@ -4,6 +4,10 @@ import introsde.assignment.model.Person;
 
 import java.util.Date;
 
+/**
+ * Represents the Person object that is expected
+ * in order to update a Person in the database.
+ */
 public class PersonUpdate {
 	
 	private Long id;

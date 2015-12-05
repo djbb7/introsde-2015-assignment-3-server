@@ -24,6 +24,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ * Represents one health measure, which belongs
+ * to a person and is of a specific measure type.
+ */
 @Entity
 @Table(name="Measure")
 @NamedQueries(value={

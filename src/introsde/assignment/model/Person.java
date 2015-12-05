@@ -24,6 +24,10 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ * This is the main entity and represents a Person
+ * along with her measures
+ */
 @Entity
 @Table(name="Person")
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
@@ -48,11 +52,12 @@ public class Person {
 	@Column(name="birthdate")
 	private Date birthdate;
 	
+	//The latest measure of each measure type
 	@OneToMany(targetEntity=CurrentHealth.class)
 	@JoinColumn(name="idPerson", referencedColumnName="id", nullable=false, updatable=false, insertable=false)
 	private List<Measure> currentHealth; // one for each type of measure
 	
-	
+	//All the person's measures
 	@OneToMany(cascade=CascadeType.ALL ,fetch=FetchType.EAGER, targetEntity=Measure.class)
 	@JoinColumn(name="idPerson", referencedColumnName="id", nullable=false)
 	private List<Measure> healthHistory; // all measurements
@@ -111,8 +116,7 @@ public class Person {
 	}
 	
 	// Database operations
-	// Notice that, for this example, we create and destroy and entityManager on each operation. 
-	// How would you change the DAO to not having to create the entity manager every time? 
+
 	public static Person getPersonById(long personId) {
 		EntityManager em = PersonMeasureDao.instance.createEntityManager();
 		Person p = em.find(Person.class, personId);

@@ -5,6 +5,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+/**
+ * Entity Manager wrapper for accessing the database
+ */
 public enum PersonMeasureDao {
     instance;
     private EntityManagerFactory emf;

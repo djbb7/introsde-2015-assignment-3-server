@@ -13,6 +13,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+/**
+ * Describes the measure types that the system can 
+ * handle (e.g. weight, height, blood pressure)
+ */
 @Entity
 @Table(name="MeasureType")
 @NamedQuery(name="MeasureType.findAll", query="SELECT m FROM MeasureType m")
