@@ -12,7 +12,7 @@ public class PeoplePublisher {
 		System.out.println("Starting SOAP server...");
 		
 		String protocol = "http://";
-        String port_value = "5700";
+        String port_value = "6903";
         if (String.valueOf(System.getenv("PORT")) != "null"){
             port_value=String.valueOf(System.getenv("PORT"));
         }
